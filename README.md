@@ -1,152 +1,71 @@
-# NIST Open-Source Software Repository Template
+# qDIC-based Strain Localization Analysis with Wavelets (Q-SLAW)
 
-Use of GitHub by NIST employees for government work is subject to
-the [Rules of Behavior for GitHub][gh-rob]. This is the
-recommended template for NIST employees, since it contains
-required files with approved text. For details, please consult
-the Office of Data & Informatics' [Quickstart Guide to GitHub at
-NIST][gh-odi].
+## Description and Purpose
+This dataset is an archival version of an algorithm implementation for strain localization analysis in digital image correlation data. The original application is to detect the occurrence of localization (i.e., collective buckling, hotspots, etc.) in uniaxial stress testing of polymer foams instrumented with 2D digital image correlation. The full-field strain maps are processed with a Marr wavelet and regions of excess strain are identified. These are used to compute an overall localization intensity factor with units of strain, which quantifies the degree of excess strain in localization regions above the nominal background. A Monte Carlo-like (MC) simulation mode is included in the scripts to provide performance validation for the metric under procedurally generated fields with known localization. It is set up for using input data specifically from qDIC (https://github.com/FranckLab/qDIC) but could be straightforwardly adapted to other DIC output data. A run-script with example data from mechanical testing of an open-cell elastomeric foam is included.
 
-Please click on the green **Use this template** button above to
-create a new repository under the [usnistgov][gh-nst]
-organization for your own open-source work. Please do not "fork"
-the repository directly, and do not create the templated
-repository under your individual account.
+## Content and dependancies
 
-The key files contained in this repository -- which will also
-appear in templated copies -- are listed below, with some things
-to know about each.
+The code consists of several scripts, all of which are in the root directory of the project. Subfolders contain example input data and outputs.
 
----
+### Main runnable function
+- `localization_detection_testing` This script that sets up and runs the localization detection in MC mode to test algorithm perfomance.
+- *`run_localization_detection_on_foam_data`* This is the main script to used to run the localization detction on experimental data.
 
-## README
+### Supporting functions:
+- `calculateEij_2d` Used to compute the 2d full-field strain tensors from the deformation gradiant.
+- `calculateFij_2d` Used to compute the 2d full-field deformation gradiant tensor from displacement field.
+- `compute_localization_residual` Used to compute the least-squares error for the known test cases in the MC mode.
+- `gen_synth_localized_strain_maps` Used to procedurally generate synthetic fields with known localization for the MC mode.
+- `gradientN` Used to cpmpute the N-dimensional gradient of a field.
+- `inc2cum` Used to convert incremental-mode qDIC to cumulative data using a finite-deformation mathematics.
+- *`localization_detection`* This is the core function to extract localization information from the displacement/strain field.
+- `plotting_qdic_results` Basic visualization tool for qDIC data.
 
-Each repository will contain a plain-text [README file][wk-rdm],
-preferably formatted using [GitHub-flavored Markdown][gh-mdn] and
-named `README.md` (this file) or `README`.
+### Directories
+- `example_dic_data` contains two example datasets for a nominally 144 kg/m^3 (9 lb/ft^3) impact protection foam.
+- `output` contains saved results.
 
-Per the [GitHub ROB][gh-rob] and [NIST Suborder 1801.02][nist-s-1801-02],
-your README should contain:
+### Dependancies
 
-1. Software or Data description
-   - Statements of purpose and maturity
-   - Description of the repository contents
-   - Technical installation instructions, including operating
-     system or software dependencies
-1. Contact information
-   - PI name, NIST OU, Division, and Group names
-   - Contact email address at NIST
-   - Details of mailing lists, chatrooms, and discussion forums,
-     where applicable
-1. Related Material
-   - URL for associated project on the NIST website or other Department
-     of Commerce page, if available
-   - References to user guides if stored outside of GitHub
-1. Directions on appropriate citation with example text
-1. References to any included non-public domain software modules,
-   and additional license language if needed, *e.g.* [BSD][li-bsd],
-   [GPL][li-gpl], or [MIT][li-mit]
+Core Matlab (developed and tested on R2023B for Win10 x64) with three toolboxes is required. These toolbxes are:
+- Image Processing Toolbox: multiple uses for filtering and image handling.
+- Wavelet Toolbox: for the wavelet analysis.
+- Signal Processing Toolbox: minor usage for peak detection. This could straightforwardly be remove with only minor impact on performance.
 
-The more detailed your README, the more likely our colleagues
-around the world are to find it through a Web search. For general
-advice on writing a helpful README, please review
-[*Making Readmes Readable*][18f-guide] from 18F and Cornell's
-[*Guide to Writing README-style Metadata*][cornell-meta].
+## Running the Q-SLAW code
+See also the `HowToRun_LocalizationAnalysis.txt` document.
 
-## LICENSE
+Briefly, the major steps are as follows:
+1. Prepare input data from DIC. If you use qDIC the "results" .mat file should have all you need. For other code you'll need to either reformat data into the qDIC format or adjust the run-script's data ingestion. 
+2. Update user-changable parameters (data direcotry, threshold, strain filter).
+3. Run the script and follow the prompts.
+4. Save output, visualize results.
 
-Each repository will contain a plain-text file named `LICENSE.md`
-or `LICENSE` that is phrased in compliance with the Public Access
-to NIST Research [*Copyright, Fair Use, and Licensing Statement
-for SRD, Data, and Software*][nist-open], which provides
-up-to-date official language for each category in a blue box.
+## Other links
+For the data used in the development and calibration of the model see: <add data doi here>.
 
-- The version of [LICENSE.md](LICENSE.md) included in this
-  repository is approved for use.
-- Updated language on the [Licensing Statement][nist-open] page
-  supersedes the copy in this repository. You may transcribe the
-  language from the appropriate "blue box" on that page into your
-  README.
+The initial publication this is develop for is: J Tao**, AK Landauer∗∗, Z Yan∗∗, X Li, C Franck, DL Henann "Large-deformation constitutive modeling of viscoelastic foams: Application to a open-cell foam material" (In preperation)
 
-If your repository includes any software or data that is licensed
-by a third party, create a separate file for third-party licenses
-(`THIRD_PARTY_LICENSES.md` is recommended) and include copyright
-and licensing statements in compliance with the conditions of
-those licenses.
+Please cite as:
+> [add code citation/doi here].
 
-## CODEOWNERS
 
-This template repository includes a file named
-[CODEOWNERS](CODEOWNERS), which visitors can view to discover
-which GitHub users are "in charge" of the repository. More
-crucially, GitHub uses it to assign reviewers on pull requests.
-GitHub documents the file (and how to write one) [here][gh-cdo].
+## Contact and support
+For questions, please open a new entry in the "Issues" tab in GitHub. If needed, you can also find authors' contact information on the data description website. 
 
-***Please update that file*** to point to your own account or
-team, so that the [Open-Source Team][gh-ost] doesn't get spammed
-with spurious review requests. *Thanks!*
+Alexander Landauer (NIST, Material Measurement Lab, Materials Measurement Science Division) is the developer of the code.
 
-## CODEMETA
+## License
 
-Project metadata is captured in `CODEMETA.yaml`, used by the NIST
-Software Portal to sort your work under the appropriate thematic
-homepage. ***Please update this file*** with the appropriate
-"theme" and "category" for your code/data/software. The Tier 1
-themes are:
+### NIST Software Licensing Statement
 
-- [Advanced communications](https://www.nist.gov/advanced-communications)
-- [Bioscience](https://www.nist.gov/bioscience)
-- [Buildings and Construction](https://www.nist.gov/buildings-construction)
-- [Chemistry](https://www.nist.gov/chemistry)
-- [Electronics](https://www.nist.gov/electronics)
-- [Energy](https://www.nist.gov/energy)
-- [Environment](https://www.nist.gov/environment)
-- [Fire](https://www.nist.gov/fire)
-- [Forensic Science](https://www.nist.gov/forensic-science)
-- [Health](https://www.nist.gov/health)
-- [Information Technology](https://www.nist.gov/information-technology)
-- [Infrastructure](https://www.nist.gov/infrastructure)
-- [Manufacturing](https://www.nist.gov/manufacturing)
-- [Materials](https://www.nist.gov/materials)
-- [Mathematics and Statistics](https://www.nist.gov/mathematics-statistics)
-- [Metrology](https://www.nist.gov/metrology)
-- [Nanotechnology](https://www.nist.gov/nanotechnology)
-- [Neutron research](https://www.nist.gov/neutron-research)
-- [Performance excellence](https://www.nist.gov/performance-excellence)
-- [Physics](https://www.nist.gov/physics)
-- [Public safety](https://www.nist.gov/public-safety)
-- [Resilience](https://www.nist.gov/resilience)
-- [Standards](https://www.nist.gov/standards)
-- [Transportation](https://www.nist.gov/transportation)
+NIST-developed software is provided by NIST as a public service. You may use, copy, and distribute copies of the software in any medium, provided that you keep intact this entire notice. You may improve, modify, and create derivative works of the software or any portion of the software, and you may copy and distribute such modifications or works. Modified works should carry a notice stating that you changed the software and should note the date and nature of any such change. Please explicitly acknowledge the National Institute of Standards and Technology as the source of the software.
 
----
+NIST-developed software is expressly provided "AS IS." NIST MAKES NO WARRANTY OF ANY KIND, EXPRESS, IMPLIED, IN FACT, OR ARISING BY OPERATION OF LAW, INCLUDING, WITHOUT LIMITATION, THE IMPLIED WARRANTY OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, NON-INFRINGEMENT, AND DATA ACCURACY. NIST NEITHER REPRESENTS NOR WARRANTS THAT THE OPERATION OF THE SOFTWARE WILL BE UNINTERRUPTED OR ERROR-FREE, OR THAT ANY DEFECTS WILL BE CORRECTED. NIST DOES NOT WARRANT OR MAKE ANY REPRESENTATIONS REGARDING THE USE OF THE SOFTWARE OR THE RESULTS THEREOF, INCLUDING BUT NOT LIMITED TO THE CORRECTNESS, ACCURACY, RELIABILITY, OR USEFULNESS OF THE SOFTWARE.
 
-[usnistgov/opensource-repo][gh-osr] is developed and maintained
-by the [opensource-team][gh-ost], principally:
+You are solely responsible for determining the appropriateness of using and distributing the software and you assume all risks associated with its use, including but not limited to the risks and costs of program errors, compliance with applicable laws, damage to or loss of data, programs or equipment, and the unavailability or interruption of operation. This software is not intended to be used in any situation where a failure could cause risk of injury or damage to property. The software developed by NIST employees is not subject to copyright protection within the United States.
 
-- Gretchen Greene, @GRG2
-- Yannick Congo, @faical-yannick-congo
-- Trevor Keller, @tkphd
+### Disclaimers
+Certain commercial equipment, instruments, or materials are identified in this paper in order to specify the experimental procedure adequately. Such identification is not intended to imply recommendation or endorsement by NIST, nor is it intended to imply that the materials or equipment identified are necessarily the best available for the purpose.
 
-Please reach out with questions and comments.
-
-<!-- References -->
-
-[18f-guide]: https://github.com/18F/open-source-guide/blob/18f-pages/pages/making-readmes-readable.md
-[cornell-meta]: https://data.research.cornell.edu/content/readme
-[gh-cdo]: https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners
-[gh-mdn]: https://github.github.com/gfm/
-[gh-nst]: https://github.com/usnistgov
-[gh-odi]: https://odiwiki.nist.gov/ODI/GitHub.html
-[gh-osr]: https://github.com/usnistgov/opensource-repo/
-[gh-ost]: https://github.com/orgs/usnistgov/teams/opensource-team
-[gh-rob]: https://odiwiki.nist.gov/pub/ODI/GitHub/GHROB.pdf
-[gh-tpl]: https://github.com/usnistgov/carpentries-development/discussions/3
-[li-bsd]: https://opensource.org/licenses/bsd-license
-[li-gpl]: https://opensource.org/licenses/gpl-license
-[li-mit]: https://opensource.org/licenses/mit-license
-[nist-code]: https://code.nist.gov
-[nist-disclaimer]: https://www.nist.gov/open/license
-[nist-s-1801-02]: https://inet.nist.gov/adlp/directives/review-data-intended-publication
-[nist-open]: https://www.nist.gov/open/license#software
-[wk-rdm]: https://en.wikipedia.org/wiki/README
+The opinions, recommendations, findings, and conclusions in the manuscript do not necessarily reflect the views or policies of NIST or the United States Government.

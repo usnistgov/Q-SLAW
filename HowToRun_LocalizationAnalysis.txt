@@ -1,0 +1,8 @@
+%%%%%%%%%% How to run the localization analysis %%%%%%%%%%%%%
+1. Stay on this path
+2. Open the main file "./run_localization_detection_on_foam_data.m"
+3. Prepare your images and place them in a subfolder for ease of accesss (but that can be anywhere you like)
+4. Choose a threshold for maximum localization intensity (line 16) and a strain filter to use (line 17)
+5. Execute the main file(s) and follow prompts
+
+
