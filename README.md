@@ -7,7 +7,7 @@ This dataset is an archival version of an algorithm implementation for strain lo
 
 The code consists of several scripts, all of which are in the root directory of the project. Subfolders contain example input data and outputs.
 
-### Main runnable function
+### Runnable main functions
 - `localization_detection_testing` This script that sets up and runs the localization detection in MC mode to test algorithm perfomance.
 - *`run_localization_detection_on_foam_data`* This is the main script to used to run the localization detction on experimental data.
 
