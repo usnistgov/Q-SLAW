@@ -44,7 +44,7 @@ Briefly, the major steps are as follows:
 ## Other links
 For the data used in the development and calibration of the model see: <add data doi here>.
 
-The initial publication this is develop for is: J Tao**, AK Landauer∗∗, Z Yan∗∗, X Li, C Franck, DL Henann "Large-deformation constitutive modeling of viscoelastic foams: Application to a open-cell foam material" (In preperation)
+The initial publication this is develop for is: J Tao**, AK Landauer∗∗, Z Yan∗∗, X Li, C Franck, DL Henann "Large-deformation constitutive modeling of viscoelastic foams: Application to a open-cell foam material" (In preperation). (** = equal contribution)
 
 Please cite as:
 > [add code citation/doi here].
