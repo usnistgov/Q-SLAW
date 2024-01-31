@@ -1,7 +1,7 @@
 # qDIC-based Strain Localization Analysis with Wavelets (Q-SLAW)
 
 ## Description and Purpose
-This dataset is an archival version of an algorithm implementation for strain localization analysis in digital image correlation data. The original application is to detect the occurrence of localization (i.e., collective buckling, hotspots, etc.) in uniaxial stress testing of polymer foams instrumented with 2D digital image correlation. The full-field strain maps are processed with a Marr wavelet and regions of excess strain are identified. These are used to compute an overall localization intensity factor with units of strain, which quantifies the degree of excess strain in localization regions above the nominal background. A Monte Carlo-like (MC) simulation mode is included in the scripts to provide performance validation for the metric under procedurally generated fields with known localization. It is set up for using input data specifically from qDIC (https://github.com/FranckLab/qDIC) but could be straightforwardly adapted to other DIC output data. A run-script with example data from mechanical testing of an open-cell elastomeric foam is included.
+This repository contains algorithm implmented in Matlab for strain localization analysis in digital image correlation data. The original application is to detect the occurrence of localization (i.e., collective buckling, hotspots, etc.) in uniaxial stress testing of polymer foams instrumented with 2D digital image correlation. The full-field strain maps are processed with a Marr wavelet and regions of excess strain are identified. These are used to compute an overall localization intensity factor with units of strain, which quantifies the degree of excess strain in localization regions above the nominal background. A Monte Carlo-like (MC) simulation mode is included in the scripts to provide performance validation for the metric under procedurally generated fields with known localization. It is set up for using input data specifically from qDIC (https://github.com/FranckLab/qDIC) but could be straightforwardly adapted to other DIC output data. A run-script with example data from mechanical testing of an open-cell elastomeric foam is included.
 
 ## Content and dependancies
 
@@ -42,7 +42,7 @@ Briefly, the major steps are as follows:
 4. Save output, visualize results.
 
 ## Other links
-For the data used in the development and calibration of the model see: <add data doi here>.
+For the data used in the development and calibration of the model see the related manuscript and associated data. The archival version of the initial release is available at: https://data.nist.gov/od/id/mds2-3141.
 
 The initial publication this is develop for is: J Tao**, AK Landauer∗∗, Z Yan∗∗, X Li, C Franck, DL Henann "Large-deformation constitutive modeling of viscoelastic foams: Application to a open-cell foam material" (In preperation)
 
