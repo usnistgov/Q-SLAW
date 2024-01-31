@@ -7,7 +7,7 @@ This dataset is an archival version of an algorithm implementation for strain lo
 
 The code consists of several scripts, all of which are in the root directory of the project. Subfolders contain example input data and outputs.
 
-### Runnable main functions
+### Main runnable function
 - `localization_detection_testing` This script that sets up and runs the localization detection in MC mode to test algorithm perfomance.
 - *`run_localization_detection_on_foam_data`* This is the main script to used to run the localization detction on experimental data.
 
@@ -44,10 +44,10 @@ Briefly, the major steps are as follows:
 ## Other links
 For the data used in the development and calibration of the model see: <add data doi here>.
 
-The initial publication this is develop for is: J Tao**, AK Landauer∗∗, Z Yan∗∗, X Li, C Franck, DL Henann "Large-deformation constitutive modeling of viscoelastic foams: Application to a open-cell foam material" (In preperation). (** = equal contribution)
+The initial publication this is develop for is: J Tao**, AK Landauer∗∗, Z Yan∗∗, X Li, C Franck, DL Henann "Large-deformation constitutive modeling of viscoelastic foams: Application to a open-cell foam material" (In preperation)
 
 Please cite as:
-> [add code citation/doi here].
+> Alexander Landauer (2024), Code for qDIC-based Strain Localization Analysis with Wavelets (Q-SLAW), National Institute of Standards and Technology, https://doi.org/10.18434/mds2-3141.
 
 
 ## Contact and support
